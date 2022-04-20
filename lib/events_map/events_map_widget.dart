@@ -1,3 +1,4 @@
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -38,23 +39,53 @@ class _EventsMapWidgetState extends State<EventsMapWidget> {
                     decoration: BoxDecoration(),
                     child: Stack(
                       children: [
-                        FlutterFlowGoogleMap(
-                          controller: googleMapsController,
-                          onCameraIdle: (latLng) => googleMapsCenter = latLng,
-                          initialLocation: googleMapsCenter ??=
-                              LatLng(13.106061, -59.613158),
-                          markerColor: GoogleMarkerColor.violet,
-                          mapType: MapType.normal,
-                          style: GoogleMapStyle.standard,
-                          initialZoom: 14,
-                          allowInteraction: true,
-                          allowZoom: true,
-                          showZoomControls: true,
-                          showLocation: true,
-                          showCompass: false,
-                          showMapToolbar: false,
-                          showTraffic: false,
-                          centerMapOnMarkerTap: true,
+                        StreamBuilder<List<LocationRecord>>(
+                          stream: queryLocationRecord(),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                  ),
+                                ),
+                              );
+                            }
+                            List<LocationRecord> googleMapLocationRecordList =
+                                snapshot.data;
+                            return FlutterFlowGoogleMap(
+                              controller: googleMapsController,
+                              onCameraIdle: (latLng) =>
+                                  googleMapsCenter = latLng,
+                              initialLocation: googleMapsCenter ??=
+                                  LatLng(13.106061, -59.613158),
+                              markers: (googleMapLocationRecordList ?? [])
+                                  .map(
+                                    (googleMapLocationRecord) =>
+                                        FlutterFlowMarker(
+                                      googleMapLocationRecord.reference.path,
+                                      googleMapLocationRecord.geolocation,
+                                    ),
+                                  )
+                                  .toList(),
+                              markerColor: GoogleMarkerColor.violet,
+                              mapType: MapType.normal,
+                              style: GoogleMapStyle.standard,
+                              initialZoom: 14,
+                              allowInteraction: true,
+                              allowZoom: true,
+                              showZoomControls: true,
+                              showLocation: true,
+                              showCompass: false,
+                              showMapToolbar: false,
+                              showTraffic: false,
+                              centerMapOnMarkerTap: true,
+                            );
+                          },
                         ),
                         Padding(
                           padding:
