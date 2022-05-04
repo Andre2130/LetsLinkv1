@@ -199,7 +199,14 @@ class _EventsWidgetState extends State<EventsWidget> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              EventDetailsWidget(),
+                                              EventDetailsWidget(
+                                            eventName: '',
+                                            eventDescription: '',
+                                            address: '',
+                                            coverImage: '',
+                                            geoLoacation:
+                                                listViewEventRecord.geolocation,
+                                          ),
                                         ),
                                       );
                                     },

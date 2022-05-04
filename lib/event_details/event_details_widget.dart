@@ -3,12 +3,26 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/lat_lng.dart';
 import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EventDetailsWidget extends StatefulWidget {
-  const EventDetailsWidget({Key key}) : super(key: key);
+  const EventDetailsWidget({
+    Key key,
+    this.eventName,
+    this.eventDescription,
+    this.address,
+    this.coverImage,
+    this.geoLoacation,
+  }) : super(key: key);
+
+  final String eventName;
+  final String eventDescription;
+  final String address;
+  final String coverImage;
+  final LatLng geoLoacation;
 
   @override
   _EventDetailsWidgetState createState() => _EventDetailsWidgetState();
@@ -16,7 +30,7 @@ class EventDetailsWidget extends StatefulWidget {
 
 class _EventDetailsWidgetState extends State<EventDetailsWidget> {
   LatLng googleMapsCenter;
-  Completer<GoogleMapController> googleMapsController;
+  final googleMapsController = Completer<GoogleMapController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -48,8 +62,8 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       width: double.infinity,
                       child: Stack(
                         children: [
-                          Image.asset(
-                            'assets/images/event_details_background.jpeg',
+                          Image.network(
+                            widget.coverImage,
                             width: double.infinity,
                             height: double.infinity,
                             fit: BoxFit.cover,
@@ -122,7 +136,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                                 child: Text(
-                                  'Event Name',
+                                  widget.eventName,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
                                       .override(
@@ -185,7 +199,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                 size: 24,
                               ),
                               Text(
-                                'Event Location',
+                                widget.address,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -321,7 +335,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                           child: Text(
-                            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text everLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever.',
+                            widget.eventDescription,
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'Poppins',
@@ -330,152 +344,6 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                       fontSize: 12,
                                       fontWeight: FontWeight.normal,
                                     ),
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(0, 10, 275, 0),
-                          child: Text(
-                            'Photos',
-                            style:
-                                FlutterFlowTheme.of(context).bodyText1.override(
-                                      fontFamily: 'Poppins',
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBtnText,
-                                      fontSize: 15,
-                                    ),
-                          ),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Color(0x00EEEEEE),
-                          ),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 4, 0, 0),
-                                  child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5, 8, 0, 8),
-                                          child: Container(
-                                            width: 94,
-                                            height: 65,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: Image.asset(
-                                                  'assets/images/imageSanAn@3x.jpg',
-                                                ).image,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 3,
-                                                  color: Color(0x64000000),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 8, 0, 8),
-                                          child: Container(
-                                            width: 94,
-                                            height: 65,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: Image.asset(
-                                                  'assets/images/imageSanAn@3x.jpg',
-                                                ).image,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 3,
-                                                  color: Color(0x64000000),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 8, 0, 8),
-                                          child: Container(
-                                            width: 94,
-                                            height: 65,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: Image.asset(
-                                                  'assets/images/imageSanAn@3x.jpg',
-                                                ).image,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 3,
-                                                  color: Color(0x64000000),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 8, 0, 8),
-                                          child: Container(
-                                            width: 94,
-                                            height: 65,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                fit: BoxFit.cover,
-                                                image: Image.asset(
-                                                  'assets/images/imageSanAn@3x.jpg',
-                                                ).image,
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  blurRadius: 3,
-                                                  color: Color(0x64000000),
-                                                  offset: Offset(0, 2),
-                                                )
-                                              ],
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
                           ),
                         ),
                         Padding(
@@ -499,7 +367,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             controller: googleMapsController,
                             onCameraIdle: (latLng) => googleMapsCenter = latLng,
                             initialLocation: googleMapsCenter ??=
-                                LatLng(13.106061, -59.613158),
+                                widget.geoLoacation,
                             markerColor: GoogleMarkerColor.violet,
                             mapType: MapType.normal,
                             style: GoogleMapStyle.standard,

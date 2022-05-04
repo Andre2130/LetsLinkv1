@@ -38,7 +38,7 @@ abstract class EventRecord implements Built<EventRecord, EventRecordBuilder> {
   String get price;
 
   @nullable
-  BuiltList<String> get images;
+  String get coverImage;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -51,7 +51,7 @@ abstract class EventRecord implements Built<EventRecord, EventRecordBuilder> {
     ..description = ''
     ..location = ''
     ..price = ''
-    ..images = ListBuilder();
+    ..coverImage = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Event');
@@ -84,6 +84,7 @@ Map<String, dynamic> createEventRecordData({
   String location,
   LatLng geolocation,
   String price,
+  String coverImage,
 }) =>
     serializers.toFirestore(
         EventRecord.serializer,
@@ -97,4 +98,4 @@ Map<String, dynamic> createEventRecordData({
           ..location = location
           ..geolocation = geolocation
           ..price = price
-          ..images = null));
+          ..coverImage = coverImage));

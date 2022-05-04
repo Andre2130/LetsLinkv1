@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../event_details/event_details_widget.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -21,22 +22,20 @@ class CreateEventWidget extends StatefulWidget {
 
 class _CreateEventWidgetState extends State<CreateEventWidget> {
   DateTime datePicked;
-  String uploadedFileUrl1 = '';
+  String uploadedFileUrl = '';
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
-  String uploadedFileUrl2 = '';
-  TextEditingController textController4;
+  String dropDownValue;
   LatLng currentUserLocationValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
-    textController3 = TextEditingController();
-    textController4 = TextEditingController();
+    textController1 = TextEditingController(text: 'Event Name');
+    textController2 = TextEditingController(text: 'Description');
+    textController3 = TextEditingController(text: 'Location');
   }
 
   @override
@@ -145,8 +144,8 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                                     ScaffoldMessenger.of(context)
                                         .hideCurrentSnackBar();
                                     if (downloadUrls != null) {
-                                      setState(() => uploadedFileUrl1 =
-                                          downloadUrls.first);
+                                      setState(() =>
+                                          uploadedFileUrl = downloadUrls.first);
                                       showUploadMessage(
                                         context,
                                         'Success!',
@@ -167,52 +166,11 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 8, 0, 8),
-                                      child: Container(
-                                        width: 48,
-                                        height: 48,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 3,
-                                              color: Color(0x64000000),
-                                              offset: Offset(0, 2),
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 8, 8, 8),
-                                              child: Icon(
-                                                Icons.close,
-                                                color: Colors.white,
-                                                size: 10,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                            Image.network(
+                              uploadedFileUrl,
+                              width: 100,
+                              height: 100,
+                              fit: BoxFit.cover,
                             ),
                           ],
                         ),
@@ -258,6 +216,8 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                               ),
                               borderRadius: BorderRadius.circular(6),
                             ),
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
                           ),
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
@@ -274,7 +234,6 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                           controller: textController2,
                           obscureText: false,
                           decoration: InputDecoration(
-                            hintText: 'Price',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFF263238),
@@ -289,6 +248,8 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                               ),
                               borderRadius: BorderRadius.circular(6),
                             ),
+                            contentPadding:
+                                EdgeInsetsDirectional.fromSTEB(10, 20, 0, 0),
                           ),
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
@@ -297,196 +258,13 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                                 color:
                                     FlutterFlowTheme.of(context).primaryBtnText,
                               ),
+                          maxLines: 4,
                         ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(10, 20, 0, 0),
                         child: TextFormField(
                           controller: textController3,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            hintText: 'Description',
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF263238),
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0xFF263238),
-                                width: 1,
-                              ),
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                          ),
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                              ),
-                        ),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FFButtonWidget(
-                            onPressed: () async {
-                              await DatePicker.showDateTimePicker(
-                                context,
-                                showTitleActions: true,
-                                onConfirm: (date) {
-                                  setState(() => datePicked = date);
-                                },
-                                currentTime: getCurrentTimestamp,
-                                minTime: getCurrentTimestamp,
-                              );
-                            },
-                            text: 'Date',
-                            options: FFButtonOptions(
-                              width: 130,
-                              height: 40,
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    color: Colors.white,
-                                  ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: 12,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 0, 0),
-                        child: Text(
-                          'Add Event Image',
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText1
-                              .override(
-                                fontFamily: 'Poppins',
-                                color:
-                                    FlutterFlowTheme.of(context).primaryBtnText,
-                                fontSize: 18,
-                              ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
-                              child: InkWell(
-                                onTap: () async {
-                                  final selectedMedia =
-                                      await selectMediaWithSourceBottomSheet(
-                                    context: context,
-                                    allowPhoto: true,
-                                  );
-                                  if (selectedMedia != null &&
-                                      selectedMedia.every((m) =>
-                                          validateFileFormat(
-                                              m.storagePath, context))) {
-                                    showUploadMessage(
-                                      context,
-                                      'Uploading file...',
-                                      showLoading: true,
-                                    );
-                                    final downloadUrls = await Future.wait(
-                                        selectedMedia.map((m) async =>
-                                            await uploadData(
-                                                m.storagePath, m.bytes)));
-                                    ScaffoldMessenger.of(context)
-                                        .hideCurrentSnackBar();
-                                    if (downloadUrls != null) {
-                                      setState(() => uploadedFileUrl2 =
-                                          downloadUrls.first);
-                                      showUploadMessage(
-                                        context,
-                                        'Success!',
-                                      );
-                                    } else {
-                                      showUploadMessage(
-                                        context,
-                                        'Failed to upload media',
-                                      );
-                                      return;
-                                    }
-                                  }
-                                },
-                                child: Icon(
-                                  Icons.add_circle,
-                                  color: Color(0xCDFFB800),
-                                  size: 42,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 8, 0, 8),
-                                      child: Container(
-                                        width: 48,
-                                        height: 48,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 3,
-                                              color: Color(0x64000000),
-                                              offset: Offset(0, 2),
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 8, 8, 8),
-                                              child: Icon(
-                                                Icons.close,
-                                                color: Colors.white,
-                                                size: 10,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(10, 20, 0, 0),
-                        child: TextFormField(
-                          controller: textController4,
                           obscureText: false,
                           decoration: InputDecoration(
                             hintText: 'Address',
@@ -514,6 +292,88 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                               ),
                         ),
                       ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                await DatePicker.showDateTimePicker(
+                                  context,
+                                  showTitleActions: true,
+                                  onConfirm: (date) {
+                                    setState(() => datePicked = date);
+                                  },
+                                  currentTime: getCurrentTimestamp,
+                                  minTime: getCurrentTimestamp,
+                                );
+                              },
+                              text: 'Date',
+                              options: FFButtonOptions(
+                                width: 130,
+                                height: 40,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            valueOrDefault<String>(
+                              dateTimeFormat('MMMMEEEEd', datePicked),
+                              'Date',
+                            ),
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBtnText,
+                                    ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
+                        child: FlutterFlowDropDown(
+                          options: [
+                            'Casual',
+                            'Night Life',
+                            'Education',
+                            'sports',
+                            'other'
+                          ].toList(),
+                          onChanged: (val) =>
+                              setState(() => dropDownValue = val),
+                          width: 180,
+                          height: 40,
+                          textStyle:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.black,
+                                  ),
+                          hintText: 'Categories',
+                          fillColor: Colors.white,
+                          elevation: 2,
+                          borderColor: Colors.transparent,
+                          borderWidth: 0,
+                          borderRadius: 0,
+                          margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                          hidesUnderline: true,
+                        ),
+                      ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                         child: FFButtonWidget(
@@ -522,20 +382,16 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                                 await getCurrentUserLocation(
                                     defaultLocation: LatLng(0.0, 0.0));
 
-                            final eventCreateData = {
-                              ...createEventRecordData(
-                                name: textController1.text,
-                                eventStatus: '',
-                                organizer: currentUserUid,
-                                startdate: datePicked,
-                                enddate: datePicked,
-                                description: textController3.text,
-                                location: textController4.text,
-                                geolocation: currentUserLocationValue,
-                                price: textController2.text,
-                              ),
-                              'images': [uploadedFileUrl1],
-                            };
+                            final eventCreateData = createEventRecordData(
+                              name: textController1.text,
+                              eventStatus: 'Open',
+                              organizer: currentJwtToken,
+                              startdate: datePicked,
+                              description: textController2.text,
+                              location: textController3.text,
+                              geolocation: currentUserLocationValue,
+                              coverImage: uploadedFileUrl,
+                            );
                             await EventRecord.collection
                                 .doc()
                                 .set(eventCreateData);

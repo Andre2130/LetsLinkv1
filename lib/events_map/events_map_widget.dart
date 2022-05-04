@@ -16,7 +16,7 @@ class EventsMapWidget extends StatefulWidget {
 
 class _EventsMapWidgetState extends State<EventsMapWidget> {
   LatLng googleMapsCenter;
-  Completer<GoogleMapController> googleMapsController;
+  final googleMapsController = Completer<GoogleMapController>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
