@@ -34,9 +34,9 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController(text: 'Event Name');
-    textController2 = TextEditingController(text: 'Description');
-    textController3 = TextEditingController(text: 'Location');
+    textController1 = TextEditingController();
+    textController2 = TextEditingController();
+    textController3 = TextEditingController();
   }
 
   @override
@@ -205,7 +205,8 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                           controller: textController1,
                           obscureText: false,
                           decoration: InputDecoration(
-                            hintText: 'Enter Name',
+                            labelText: 'Event Name',
+                            hintText: 'Event Name',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFF263238),
@@ -238,6 +239,7 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                           controller: textController2,
                           obscureText: false,
                           decoration: InputDecoration(
+                            labelText: 'Description',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0xFF263238),
@@ -271,6 +273,7 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                           controller: textController3,
                           obscureText: false,
                           decoration: InputDecoration(
+                            labelText: 'Location',
                             hintText: 'Address',
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -389,12 +392,15 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                             final eventCreateData = createEventRecordData(
                               name: textController1.text,
                               eventStatus: 'Open',
-                              organizer: currentJwtToken,
+                              organizer: currentUserDisplayName,
                               startdate: datePicked,
                               description: textController2.text,
                               location: textController3.text,
                               geolocation: currentUserLocationValue,
-                              coverImage: uploadedFileUrl,
+                              coverImage: valueOrDefault<String>(
+                                uploadedFileUrl,
+                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/94uag5545fl7/background_login.jpeg',
+                              ),
                             );
                             await EventRecord.collection
                                 .doc()
