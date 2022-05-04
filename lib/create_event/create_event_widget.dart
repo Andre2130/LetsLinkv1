@@ -118,10 +118,11 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                               child: InkWell(
                                 onTap: () async {
                                   final selectedMedia =
@@ -172,8 +173,8 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                                 uploadedFileUrl,
                                 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/94uag5545fl7/background_login.jpeg',
                               ),
-                              width: 100,
-                              height: 100,
+                              width: 50,
+                              height: 50,
                               fit: BoxFit.cover,
                             ),
                           ],
