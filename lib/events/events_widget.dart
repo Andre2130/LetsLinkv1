@@ -220,7 +220,11 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
                                                 child: Image.network(
-                                                  'https://images.metmuseum.org/CRDImages/dp/original/DP108505.jpg',
+                                                  valueOrDefault<String>(
+                                                    listViewEventRecord
+                                                        .coverImage,
+                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/94uag5545fl7/background_login.jpeg',
+                                                  ),
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   fit: BoxFit.cover,
