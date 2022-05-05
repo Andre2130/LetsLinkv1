@@ -16,6 +16,8 @@ class EventDetailsWidget extends StatefulWidget {
     this.address,
     this.coverImage,
     this.geoLoacation,
+    this.eventStatus,
+    this.organizer,
   }) : super(key: key);
 
   final String eventName;
@@ -23,6 +25,8 @@ class EventDetailsWidget extends StatefulWidget {
   final String address;
   final String coverImage;
   final LatLng geoLoacation;
+  final String eventStatus;
+  final String organizer;
 
   @override
   _EventDetailsWidgetState createState() => _EventDetailsWidgetState();
@@ -63,7 +67,10 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       child: Stack(
                         children: [
                           Image.network(
-                            widget.coverImage,
+                            valueOrDefault<String>(
+                              widget.coverImage,
+                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/retmyht3nj1y/event_details_background.jpeg',
+                            ),
                             width: double.infinity,
                             height: double.infinity,
                             fit: BoxFit.cover,

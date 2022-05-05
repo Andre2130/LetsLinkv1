@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../event_details/event_details_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -25,13 +26,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       appBar: AppBar(
         backgroundColor: Color(0x004B39EF),
         automaticallyImplyLeading: false,
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(100),
-          child: Image.network(
-            'https://picsum.photos/seed/145/600',
-            width: 100,
-            height: 100,
-            fit: BoxFit.cover,
+        leading: AuthUserStreamWidget(
+          child: InkWell(
+            onTap: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NavBarPage(initialPage: 'Profile'),
+                ),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.network(
+                currentUserPhoto,
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         ),
         title: Text(
@@ -330,7 +343,23 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              EventDetailsWidget(),
+                                              EventDetailsWidget(
+                                            eventName: listViewEventRecord.name,
+                                            address:
+                                                listViewEventRecord.location,
+                                            coverImage: valueOrDefault<String>(
+                                              listViewEventRecord.coverImage,
+                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/94uag5545fl7/background_login.jpeg',
+                                            ),
+                                            geoLoacation:
+                                                listViewEventRecord.geolocation,
+                                            eventStatus:
+                                                listViewEventRecord.eventStatus,
+                                            organizer:
+                                                listViewEventRecord.organizer,
+                                            eventDescription:
+                                                listViewEventRecord.description,
+                                          ),
                                         ),
                                       );
                                     },
@@ -343,8 +372,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               Align(
                                                 alignment:
                                                     AlignmentDirectional(0, 0),
-                                                child: Image.asset(
-                                                  'assets/images/background_login.jpeg',
+                                                child: Image.network(
+                                                  valueOrDefault<String>(
+                                                    listViewEventRecord
+                                                        .coverImage,
+                                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/94uag5545fl7/background_login.jpeg',
+                                                  ),
                                                   width: double.infinity,
                                                   height: double.infinity,
                                                   fit: BoxFit.cover,
@@ -453,7 +486,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               child: Text(
                                                                 dateTimeFormat(
                                                                     'MMMMEEEEd',
-                                                                    cardEventRecord
+                                                                    listViewEventRecord
                                                                         .startdate),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)

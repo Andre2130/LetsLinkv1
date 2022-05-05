@@ -200,12 +200,21 @@ class _EventsWidgetState extends State<EventsWidget> {
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               EventDetailsWidget(
-                                            eventName: '',
-                                            eventDescription: '',
-                                            address: '',
-                                            coverImage: '',
+                                            eventName: listViewEventRecord.name,
+                                            eventDescription:
+                                                listViewEventRecord.description,
+                                            address:
+                                                listViewEventRecord.location,
+                                            coverImage: valueOrDefault<String>(
+                                              listViewEventRecord.coverImage,
+                                              'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/94uag5545fl7/background_login.jpeg',
+                                            ),
                                             geoLoacation:
                                                 listViewEventRecord.geolocation,
+                                            eventStatus:
+                                                listViewEventRecord.eventStatus,
+                                            organizer:
+                                                listViewEventRecord.organizer,
                                           ),
                                         ),
                                       );

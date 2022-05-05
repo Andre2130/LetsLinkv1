@@ -139,13 +139,17 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                                       'Uploading file...',
                                       showLoading: true,
                                     );
-                                    final downloadUrls = await Future.wait(
-                                        selectedMedia.map((m) async =>
-                                            await uploadData(
-                                                m.storagePath, m.bytes)));
+                                    final downloadUrls = (await Future.wait(
+                                            selectedMedia.map((m) async =>
+                                                await uploadData(
+                                                    m.storagePath, m.bytes))))
+                                        .where((u) => u != null)
+                                        .toList();
                                     ScaffoldMessenger.of(context)
                                         .hideCurrentSnackBar();
-                                    if (downloadUrls != null) {
+                                    if (downloadUrls != null &&
+                                        downloadUrls.length ==
+                                            selectedMedia.length) {
                                       setState(() =>
                                           uploadedFileUrl = downloadUrls.first);
                                       showUploadMessage(
@@ -409,7 +413,18 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => EventDetailsWidget(),
+                                builder: (context) => EventDetailsWidget(
+                                  eventName: textController1.text,
+                                  eventDescription: textController2.text,
+                                  address: textController3.text,
+                                  coverImage: valueOrDefault<String>(
+                                    uploadedFileUrl,
+                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/94uag5545fl7/background_login.jpeg',
+                                  ),
+                                  geoLoacation: currentUserLocationValue,
+                                  eventStatus: 'Open',
+                                  organizer: currentUserDisplayName,
+                                ),
                               ),
                             );
                           },
