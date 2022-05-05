@@ -134,14 +134,16 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   Align(
                     alignment: AlignmentDirectional(-0.04, 0.15),
-                    child: Text(
-                      'Hello World',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Poppins',
-                            color:
-                                FlutterFlowTheme.of(context).primaryBackground,
-                            fontSize: 15,
-                          ),
+                    child: AuthUserStreamWidget(
+                      child: Text(
+                        currentUserDisplayName,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              fontSize: 15,
+                            ),
+                      ),
                     ),
                   ),
                   Align(

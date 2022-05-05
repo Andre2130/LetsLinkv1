@@ -164,7 +164,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'Hello World',
+                                widget.organizer,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
