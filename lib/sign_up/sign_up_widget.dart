@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../complete_profile/complete_profile_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -16,16 +17,20 @@ class SignUpWidget extends StatefulWidget {
 
 class _SignUpWidgetState extends State<SignUpWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController textController1;
-  TextEditingController textController2;
-  bool passwordVisibility;
+  TextEditingController confirmPasswordTextController;
+  bool passwordVisibility2;
+  TextEditingController emailTextController;
+  TextEditingController passwordTextController;
+  bool passwordVisibility1;
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
-    passwordVisibility = false;
+    confirmPasswordTextController = TextEditingController();
+    passwordVisibility2 = false;
+    emailTextController = TextEditingController();
+    passwordTextController = TextEditingController();
+    passwordVisibility1 = false;
   }
 
   @override
@@ -111,9 +116,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 0, 30),
                                           child: TextFormField(
-                                            controller: textController1,
+                                            controller: emailTextController,
                                             obscureText: false,
                                             decoration: InputDecoration(
+                                              labelText: 'Email',
                                               hintText: 'Email',
                                               enabledBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -150,10 +156,72 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                 ),
                                           ),
                                         ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 30),
+                                          child: TextFormField(
+                                            controller: passwordTextController,
+                                            obscureText: !passwordVisibility1,
+                                            decoration: InputDecoration(
+                                              labelText: 'Password',
+                                              hintText: 'Password',
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBtnText,
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBtnText,
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              filled: true,
+                                              fillColor: Color(0x8DE4E4E4),
+                                              contentPadding:
+                                                  EdgeInsetsDirectional
+                                                      .fromSTEB(20, 0, 0, 0),
+                                              suffixIcon: InkWell(
+                                                onTap: () => setState(
+                                                  () => passwordVisibility1 =
+                                                      !passwordVisibility1,
+                                                ),
+                                                child: Icon(
+                                                  passwordVisibility1
+                                                      ? Icons
+                                                          .visibility_outlined
+                                                      : Icons
+                                                          .visibility_off_outlined,
+                                                  color: Color(0xFFFF9900),
+                                                  size: 22,
+                                                ),
+                                              ),
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily: 'Poppins',
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.normal,
+                                                ),
+                                          ),
+                                        ),
                                         TextFormField(
-                                          controller: textController2,
-                                          obscureText: !passwordVisibility,
+                                          controller:
+                                              confirmPasswordTextController,
+                                          obscureText: !passwordVisibility2,
                                           decoration: InputDecoration(
+                                            labelText: 'Confirm Password',
                                             hintText: 'Password',
                                             enabledBorder: OutlineInputBorder(
                                               borderSide: BorderSide(
@@ -182,11 +250,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                     20, 0, 0, 0),
                                             suffixIcon: InkWell(
                                               onTap: () => setState(
-                                                () => passwordVisibility =
-                                                    !passwordVisibility,
+                                                () => passwordVisibility2 =
+                                                    !passwordVisibility2,
                                               ),
                                               child: Icon(
-                                                passwordVisibility
+                                                passwordVisibility2
                                                     ? Icons.visibility_outlined
                                                     : Icons
                                                         .visibility_off_outlined,
@@ -208,49 +276,40 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        140, 20, 0, 0),
-                                    child: FFButtonWidget(
-                                      onPressed: () async {
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => NavBarPage(
-                                                initialPage: 'HomePage'),
-                                          ),
-                                        );
-                                      },
-                                      text: 'Forgot Password?',
-                                      options: FFButtonOptions(
-                                        width: 120,
-                                        height: 20,
-                                        color: Color(0x0039D2C0),
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .subtitle2
-                                            .override(
-                                              fontFamily: 'Lexend Deca',
-                                              color: Colors.white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                        elevation: 0,
-                                        borderSide: BorderSide(
-                                          color: Colors.transparent,
-                                          width: 1,
-                                        ),
-                                        borderRadius: 8,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 50, 0, 40),
                                     child: FFButtonWidget(
                                       onPressed: () async {
+                                        if (passwordTextController.text !=
+                                            confirmPasswordTextController
+                                                .text) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'Passwords don\'t match!',
+                                              ),
+                                            ),
+                                          );
+                                          return;
+                                        }
+
+                                        final user =
+                                            await createAccountWithEmail(
+                                          context,
+                                          emailTextController.text,
+                                          passwordTextController.text,
+                                        );
+                                        if (user == null) {
+                                          return;
+                                        }
+
                                         await Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => NavBarPage(
-                                                initialPage: 'HomePage'),
+                                            builder: (context) =>
+                                                CompleteProfileWidget(
+                                              email: '',
+                                            ),
                                           ),
                                         );
                                       },
@@ -360,7 +419,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                               (r) => false,
                                             );
                                           },
-                                          text: 'Sign in with Apple',
+                                          text: 'Sign up with Apple',
                                           icon: FaIcon(
                                             FontAwesomeIcons.apple,
                                             size: 20,
