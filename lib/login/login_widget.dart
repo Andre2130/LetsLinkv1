@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../sign_up/sign_up_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,15 +17,15 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController textController1;
-  TextEditingController textController2;
+  TextEditingController emailTextController;
+  TextEditingController passwordTextController;
   bool passwordVisibility;
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    emailTextController = TextEditingController();
+    passwordTextController = TextEditingController();
     passwordVisibility = false;
   }
 
@@ -111,7 +112,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 0, 30),
                                           child: TextFormField(
-                                            controller: textController1,
+                                            controller: emailTextController,
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               hintText: 'Email',
@@ -151,7 +152,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                           ),
                                         ),
                                         TextFormField(
-                                          controller: textController2,
+                                          controller: passwordTextController,
                                           obscureText: !passwordVisibility,
                                           decoration: InputDecoration(
                                             hintText: 'Password',
@@ -246,6 +247,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         0, 50, 0, 40),
                                     child: FFButtonWidget(
                                       onPressed: () async {
+                                        final user = await signInWithEmail(
+                                          context,
+                                          emailTextController.text,
+                                          passwordTextController.text,
+                                        );
+                                        if (user == null) {
+                                          return;
+                                        }
+
                                         await Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -255,6 +265,38 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         );
                                       },
                                       text: 'Login',
+                                      options: FFButtonOptions(
+                                        width: 264,
+                                        height: 43,
+                                        color: Color(0xFFFB7800),
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color: Colors.white,
+                                            ),
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
+                                        ),
+                                        borderRadius: 12,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 40),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignUpWidget(),
+                                          ),
+                                        );
+                                      },
+                                      text: 'Sign Up',
                                       options: FFButtonOptions(
                                         width: 264,
                                         height: 43,
