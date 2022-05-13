@@ -39,7 +39,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Image.network(
-                currentUserPhoto,
+                valueOrDefault<String>(
+                  currentUserPhoto,
+                  'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/cpgtej3sdeh4/profile.png',
+                ),
                 width: 100,
                 height: 100,
                 fit: BoxFit.cover,
