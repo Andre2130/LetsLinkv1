@@ -141,8 +141,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: Image.asset(
-                                      'assets/images/imageSanAn@3x.jpg',
+                                    image: Image.network(
+                                      eventsListCategoriesRecord.coverImage,
                                     ).image,
                                   ),
                                   boxShadow: [
