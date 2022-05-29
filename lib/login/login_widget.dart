@@ -16,10 +16,10 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController emailTextController;
   TextEditingController passwordTextController;
   bool passwordVisibility;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -186,6 +186,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                                                 () => passwordVisibility =
                                                     !passwordVisibility,
                                               ),
+                                              focusNode: FocusNode(
+                                                  skipTraversal: true),
                                               child: Icon(
                                                 passwordVisibility
                                                     ? Icons.visibility_outlined

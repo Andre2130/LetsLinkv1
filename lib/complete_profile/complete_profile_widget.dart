@@ -34,9 +34,9 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
-    textController3 = TextEditingController();
+    textController1 = TextEditingController(text: '[User Name]');
+    textController2 = TextEditingController(text: '[User Email]');
+    textController3 = TextEditingController(text: '[User Name]');
   }
 
   @override
@@ -302,7 +302,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                                 controller: textController1,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Your Name',
+                                  labelText: 'Your Nam',
+                                  hintText: 'What do people call you...?',
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
@@ -350,7 +351,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                                 controller: textController2,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Phone Number',
+                                  labelText: 'Email Address',
+                                  hintText: 'Enter a new email',
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
@@ -398,7 +400,8 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                                 controller: textController3,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: 'Address',
+                                  labelText: 'Your Nam',
+                                  hintText: 'What do people call you...?',
                                   hintStyle: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
@@ -477,7 +480,7 @@ class _CompleteProfileWidgetState extends State<CompleteProfileWidget> {
                               email: widget.email,
                               image: uploadedFileUrl1,
                               userID: '',
-                              displayName: textController1.text,
+                              displayName: textController3.text,
                               photoUrl: valueOrDefault<String>(
                                 uploadedFileUrl2,
                                 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/cpgtej3sdeh4/profile.png',

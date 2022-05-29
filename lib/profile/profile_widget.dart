@@ -55,7 +55,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         ),
                         child: Image.network(
                           valueOrDefault<String>(
-                            currentUserDocument?.image,
+                            valueOrDefault(currentUserDocument?.image, ''),
                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/lets-link-v1-w372xz/assets/shfrav81dwng/profile_background.jpeg',
                           ),
                           width: double.infinity,

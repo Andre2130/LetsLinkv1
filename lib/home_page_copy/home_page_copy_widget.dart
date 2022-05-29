@@ -17,8 +17,8 @@ class HomePageCopyWidget extends StatefulWidget {
 }
 
 class _HomePageCopyWidgetState extends State<HomePageCopyWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController textController;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

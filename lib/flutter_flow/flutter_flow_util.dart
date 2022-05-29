@@ -156,20 +156,26 @@ bool responsiveVisibility({
   }
 }
 
+const kTextValidatorUsernameRegex = r'^[a-zA-Z][a-zA-Z0-9_-]{2,16}$';
+const kTextValidatorEmailRegex =
+    r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$";
+
 LatLng cachedUserLocation;
 Future<LatLng> getCurrentUserLocation(
-        {LatLng defaultLocation, bool cached = false}) async =>
-    cached && cachedUserLocation != null
-        ? cachedUserLocation
-        : queryCurrentUserLocation().then((loc) {
-            if (loc != null) {
-              cachedUserLocation = loc;
-            }
-            return loc;
-          }).onError((error, _) {
-            print("Error querying user location: $error");
-            return defaultLocation;
-          });
+    {LatLng defaultLocation, bool cached = false}) async {
+  if (cached && cachedUserLocation != null) {
+    return cachedUserLocation;
+  }
+  return queryCurrentUserLocation().then((loc) {
+    if (loc != null) {
+      cachedUserLocation = loc;
+    }
+    return loc ?? defaultLocation;
+  }).onError((error, _) {
+    print("Error querying user location: $error");
+    return defaultLocation;
+  });
+}
 
 Future<LatLng> queryCurrentUserLocation() async {
   final serviceEnabled = await Geolocator.isLocationServiceEnabled();

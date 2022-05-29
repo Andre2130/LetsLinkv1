@@ -511,7 +511,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             Expanded(
                                                               child:
                                                                   AutoSizeText(
-                                                                listViewEventRecord
+                                                                cardEventRecord
                                                                     .organizer,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)

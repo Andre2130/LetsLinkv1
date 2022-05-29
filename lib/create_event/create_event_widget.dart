@@ -28,8 +28,8 @@ class _CreateEventWidgetState extends State<CreateEventWidget> {
   TextEditingController textController2;
   TextEditingController textController3;
   String dropDownValue;
-  LatLng currentUserLocationValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng currentUserLocationValue;
 
   @override
   void initState() {

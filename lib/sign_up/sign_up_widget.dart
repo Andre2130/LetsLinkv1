@@ -16,12 +16,12 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController confirmPasswordTextController;
   bool passwordVisibility2;
   TextEditingController emailTextController;
   TextEditingController passwordTextController;
   bool passwordVisibility1;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -196,6 +196,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                   () => passwordVisibility1 =
                                                       !passwordVisibility1,
                                                 ),
+                                                focusNode: FocusNode(
+                                                    skipTraversal: true),
                                                 child: Icon(
                                                   passwordVisibility1
                                                       ? Icons
@@ -253,6 +255,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                 () => passwordVisibility2 =
                                                     !passwordVisibility2,
                                               ),
+                                              focusNode: FocusNode(
+                                                  skipTraversal: true),
                                               child: Icon(
                                                 passwordVisibility2
                                                     ? Icons.visibility_outlined
@@ -279,9 +283,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         0, 50, 0, 40),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        if (passwordTextController.text !=
+                                        if (passwordTextController?.text !=
                                             confirmPasswordTextController
-                                                .text) {
+                                                ?.text) {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
