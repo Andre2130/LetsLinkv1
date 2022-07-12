@@ -2,9 +2,11 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../event_details/event_details_widget.dart';
 import '../flutter_flow/chat/index.dart';
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../group_chat/group_chat_widget.dart';
+import '../main.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,8 +26,27 @@ class _GroupWidgetState extends State<GroupWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF1D262D),
         automaticallyImplyLeading: false,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            Icons.home,
+            color: FlutterFlowTheme.of(context).primaryBtnText,
+            size: 30,
+          ),
+          onPressed: () async {
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NavBarPage(initialPage: 'HomePage'),
+              ),
+            );
+          },
+        ),
         title: Text(
           'All Chats',
           style: FlutterFlowTheme.of(context).bodyText1.override(
@@ -39,6 +60,7 @@ class _GroupWidgetState extends State<GroupWidget> {
         centerTitle: true,
         elevation: 4,
       ),
+      backgroundColor: Color(0xFF1D262D),
       body: SafeArea(
         child: DefaultTabController(
           length: 2,
@@ -47,6 +69,7 @@ class _GroupWidgetState extends State<GroupWidget> {
             children: [
               TabBar(
                 labelColor: FlutterFlowTheme.of(context).primaryColor,
+                unselectedLabelColor: Colors.white,
                 labelStyle: FlutterFlowTheme.of(context).bodyText1,
                 indicatorColor: FlutterFlowTheme.of(context).secondaryColor,
                 tabs: [
@@ -98,6 +121,12 @@ class _GroupWidgetState extends State<GroupWidget> {
                               height: 320,
                               decoration: BoxDecoration(
                                 color: Colors.transparent,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: Image.network(
+                                    listViewMemoriesRecord.image,
+                                  ).image,
+                                ),
                               ),
                               child: StreamBuilder<List<MemoriesRecord>>(
                                 stream: queryMemoriesRecord(
@@ -402,23 +431,26 @@ class _GroupWidgetState extends State<GroupWidget> {
                                         title: chatInfo.chatPreviewTitle(),
                                         userProfilePic:
                                             chatInfo.chatPreviewPic(),
-                                        color: Color(0xFFEEF0F5),
+                                        color: Color(0xFF1D262D),
                                         unreadColor: Colors.blue,
                                         titleTextStyle: GoogleFonts.getFont(
                                           'DM Sans',
-                                          color: Colors.black,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBtnText,
                                           fontWeight: FontWeight.bold,
                                           fontSize: 14,
                                         ),
                                         dateTextStyle: GoogleFonts.getFont(
                                           'DM Sans',
-                                          color: Color(0x73000000),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBtnText,
                                           fontWeight: FontWeight.normal,
                                           fontSize: 14,
                                         ),
                                         previewTextStyle: GoogleFonts.getFont(
                                           'DM Sans',
-                                          color: Color(0x73000000),
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryBtnText,
                                           fontWeight: FontWeight.normal,
                                           fontSize: 14,
                                         ),
