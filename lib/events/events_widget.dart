@@ -6,12 +6,18 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EventsWidget extends StatefulWidget {
-  const EventsWidget({Key key}) : super(key: key);
+  const EventsWidget({
+    Key key,
+    this.filtrer,
+  }) : super(key: key);
+
+  final DocumentReference filtrer;
 
   @override
   _EventsWidgetState createState() => _EventsWidgetState();
@@ -117,7 +123,10 @@ class _EventsWidgetState extends State<EventsWidget> {
             children: [
               Expanded(
                 child: StreamBuilder<List<EventRecord>>(
-                  stream: queryEventRecord(),
+                  stream: queryEventRecord(
+                    queryBuilder: (eventRecord) => eventRecord.where('category',
+                        isEqualTo: widget.filtrer),
+                  ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {

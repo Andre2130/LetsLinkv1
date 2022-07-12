@@ -1,6 +1,7 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../event_details/event_details_widget.dart';
+import '../events/events_widget.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -133,8 +134,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        NavBarPage(initialPage: 'Events'),
+                                    builder: (context) => EventsWidget(
+                                      filtrer:
+                                          eventsListCategoriesRecord.reference,
+                                    ),
                                   ),
                                 );
                               },

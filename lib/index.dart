@@ -11,3 +11,5 @@ export 'home_page_copy/home_page_copy_widget.dart' show HomePageCopyWidget;
 export 'sign_up/sign_up_widget.dart' show SignUpWidget;
 export 'complete_profile/complete_profile_widget.dart'
     show CompleteProfileWidget;
+export 'group_chat/group_chat_widget.dart' show GroupChatWidget;
+export 'group/group_widget.dart' show GroupWidget;

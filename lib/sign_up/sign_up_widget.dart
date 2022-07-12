@@ -332,7 +332,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                           color: Colors.transparent,
                                           width: 1,
                                         ),
-                                        borderRadius: 12,
+                                        borderRadius: BorderRadius.circular(12),
                                       ),
                                     ),
                                   ),
@@ -373,7 +373,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 12,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
                                           ),
                                         ),
                                         FFButtonWidget(
@@ -397,7 +398,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                               color: Colors.transparent,
                                               width: 1,
                                             ),
-                                            borderRadius: 12,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
                                           ),
                                         ),
                                       ],
@@ -442,7 +444,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                               color: Colors.transparent,
                                               width: 0,
                                             ),
-                                            borderRadius: 12,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
                                           ),
                                         ),
                                 ],

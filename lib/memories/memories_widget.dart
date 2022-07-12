@@ -98,8 +98,8 @@ class _MemoriesWidgetState extends State<MemoriesWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
-                child: StreamBuilder<List<EventRecord>>(
-                  stream: queryEventRecord(),
+                child: StreamBuilder<List<MemoriesRecord>>(
+                  stream: queryMemoriesRecord(),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
@@ -113,8 +113,9 @@ class _MemoriesWidgetState extends State<MemoriesWidget> {
                         ),
                       );
                     }
-                    List<EventRecord> listViewEventRecordList = snapshot.data;
-                    if (listViewEventRecordList.isEmpty) {
+                    List<MemoriesRecord> listViewMemoriesRecordList =
+                        snapshot.data;
+                    if (listViewMemoriesRecordList.isEmpty) {
                       return Center(
                         child: Image.asset(
                           'assets/images/emptyCollection.png',
@@ -125,10 +126,10 @@ class _MemoriesWidgetState extends State<MemoriesWidget> {
                     return ListView.builder(
                       padding: EdgeInsets.zero,
                       scrollDirection: Axis.vertical,
-                      itemCount: listViewEventRecordList.length,
+                      itemCount: listViewMemoriesRecordList.length,
                       itemBuilder: (context, listViewIndex) {
-                        final listViewEventRecord =
-                            listViewEventRecordList[listViewIndex];
+                        final listViewMemoriesRecord =
+                            listViewMemoriesRecordList[listViewIndex];
                         return Container(
                           height: 320,
                           decoration: BoxDecoration(
@@ -206,7 +207,8 @@ class _MemoriesWidgetState extends State<MemoriesWidget> {
                                                       AlignmentDirectional(
                                                           0, 0),
                                                   child: Image.network(
-                                                    'https://images.metmuseum.org/CRDImages/dp/original/DP108505.jpg',
+                                                    listViewMemoriesRecord
+                                                        .image,
                                                     width: double.infinity,
                                                     height: double.infinity,
                                                     fit: BoxFit.cover,
@@ -266,27 +268,6 @@ class _MemoriesWidgetState extends State<MemoriesWidget> {
                                                           padding:
                                                               EdgeInsetsDirectional
                                                                   .fromSTEB(0,
-                                                                      6, 0, 4),
-                                                          child: Text(
-                                                            listViewEventRecord
-                                                                .name,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText2
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                ),
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(0,
                                                                       3, 0, 6),
                                                           child: Row(
                                                             mainAxisSize:
@@ -304,8 +285,8 @@ class _MemoriesWidgetState extends State<MemoriesWidget> {
                                                                 child: Text(
                                                                   dateTimeFormat(
                                                                       'MMMMEEEEd',
-                                                                      listViewEventRecord
-                                                                          .startdate),
+                                                                      listViewMemoriesRecord
+                                                                          .timePosted),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText2
@@ -324,8 +305,8 @@ class _MemoriesWidgetState extends State<MemoriesWidget> {
                                                               Expanded(
                                                                 child:
                                                                     AutoSizeText(
-                                                                  listViewEventRecord
-                                                                      .organizer,
+                                                                  listViewMemoriesRecord
+                                                                      .description,
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyText2

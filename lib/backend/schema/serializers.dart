@@ -4,6 +4,9 @@ import 'categories_record.dart';
 import 'event_record.dart';
 import 'user_record.dart';
 import 'location_record.dart';
+import 'chats_record.dart';
+import 'chat_messages_record.dart';
+import 'memories_record.dart';
 
 import 'index.dart';
 
@@ -18,6 +21,9 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   EventRecord,
   UserRecord,
   LocationRecord,
+  ChatsRecord,
+  ChatMessagesRecord,
+  MemoriesRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
